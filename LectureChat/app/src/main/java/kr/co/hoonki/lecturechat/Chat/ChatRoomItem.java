@@ -1,4 +1,4 @@
-package kr.co.hoonki.lecturechat;
+package kr.co.hoonki.lecturechat.Chat;
 import android.widget.ImageView;
 
 /**

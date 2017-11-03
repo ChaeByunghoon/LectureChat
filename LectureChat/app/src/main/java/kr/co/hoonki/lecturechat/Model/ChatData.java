@@ -1,4 +1,4 @@
-package kr.co.hoonki.lecturechat;
+package kr.co.hoonki.lecturechat.Model;
 
 /**
  * Created by chaebyeonghun on 2017. 11. 1..
@@ -8,6 +8,7 @@ public class ChatData {
 
     private String userName;
     private String message;
+    private String sendTime;
 
     public ChatData(){
 
