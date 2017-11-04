@@ -1,4 +1,4 @@
-package kr.co.hoonki.lecturechat;
+package kr.co.hoonki.lecturechat.Chat;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import kr.co.hoonki.lecturechat.R;
 
 
 /**

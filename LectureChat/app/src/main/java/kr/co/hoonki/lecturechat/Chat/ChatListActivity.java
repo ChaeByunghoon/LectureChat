@@ -1,4 +1,4 @@
-package kr.co.hoonki.lecturechat;
+package kr.co.hoonki.lecturechat.Chat;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import kr.co.hoonki.lecturechat.LoginActivity;
+import kr.co.hoonki.lecturechat.R;
 
 public class ChatListActivity extends AppCompatActivity {
 
