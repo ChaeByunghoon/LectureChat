@@ -37,16 +37,20 @@
         >
         <Button
             android:id="@+id/btn_chatBoard_chat"
+            android:text="채팅방"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="match_parent" />
         <Button
+            android:id="@+id/btn_chatBoard_question"
+            android:text="질문방"
             android:layout_width="0dip"
             android:layout_weight="1"
             android:layout_height="match_parent" />
         
     </LinearLayout>
     <android.support.v4.view.ViewPager
+        android:id="@+id/pager_chatBoard_viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/wrapper_chatBoard_tab"
