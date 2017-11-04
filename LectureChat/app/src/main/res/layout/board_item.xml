@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_boardItem_writer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="작성자 : 채병훈"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        />
+    <TextView
+        android:id="@+id/tv_boardItem_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        tools:text="2017/08/12"
+        />
+
+    <ImageView
+        android:id="@+id/img_boardItem_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/tv_boardItem_writer"
+        tools:src="@mipmap/ic_launcher"
+        />
+    <TextView
+        android:id="@+id/tv_boardItem_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        tools:text="덧글 1"
+        />
+    <TextView
+        android:id="@+id/tv_boardItem_title"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_toEndOf="@id/img_boardItem_image"
+        android:layout_alignTop="@id/img_boardItem_image"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:maxLines="2"
+        tools:text="이거 이거 어려운데 이거 어떻게 해야하는지 감이 안잡히네요 ? 혹시 아시는분 계신가요"
+        />
+
+</RelativeLayout>
