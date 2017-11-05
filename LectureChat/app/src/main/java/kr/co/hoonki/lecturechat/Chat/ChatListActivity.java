@@ -8,11 +8,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.OnClick;
+import kr.co.hoonki.lecturechat.ChatBoardActivity;
 import kr.co.hoonki.lecturechat.LoginActivity;
 import kr.co.hoonki.lecturechat.R;
 
@@ -52,6 +54,16 @@ public class ChatListActivity extends AppCompatActivity {
             }
        });
 
+        Button testButton = findViewById(R.id.btn_chatList_search);
+
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChatListActivity.this, ChatBoardActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void checkLogin(){
@@ -66,6 +78,7 @@ public class ChatListActivity extends AppCompatActivity {
             Log.d("ChatListActivity", mFirebaseUser.getUid());
         }
     }
+
 
 
 }

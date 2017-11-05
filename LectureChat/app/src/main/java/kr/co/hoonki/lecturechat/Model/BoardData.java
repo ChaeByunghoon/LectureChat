@@ -18,10 +18,4 @@ public class BoardData {
     private String boardId;
     private String title;
     private String content;
-    private List<String> commentIds;
-    private List<String> attachmentUrls;
-
-    public int getCommentCount(){
-        return this.commentIds.size();
-    }
 }
