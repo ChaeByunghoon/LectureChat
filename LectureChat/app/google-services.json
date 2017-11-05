@@ -15,16 +15,20 @@
       },
       "oauth_client": [
         {
-          "client_id": "320273886558-rrnlje4dbug9ifhb3dp8v5pinsa0980e.apps.googleusercontent.com",
+          "client_id": "320273886558-n9dr0v4bbb7sf673n2q9305ovgcvtobc.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "320273886558-vffni0h3haj1ieq9j1j6853ddnphv2v4.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "320273886558-vvp0gjmhn4onclepvl57vcbu4m8maqop.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "kr.co.hoonki.lecturechat",
             "certificate_hash": "9cba6397eaa1f35fbeed5c4f571fef305f28d634"
           }
-        },
-        {
-          "client_id": "320273886558-vffni0h3haj1ieq9j1j6853ddnphv2v4.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -40,7 +44,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "320273886558-vffni0h3haj1ieq9j1j6853ddnphv2v4.apps.googleusercontent.com",
+              "client_id": "320273886558-n9dr0v4bbb7sf673n2q9305ovgcvtobc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
