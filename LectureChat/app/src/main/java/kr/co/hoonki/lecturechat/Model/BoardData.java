@@ -9,7 +9,7 @@ import lombok.Data;
  * Created by chaebyeonghun on 2017. 11. 3..
  */
 @Data
-@AllArgsConstructor
+@AllArgsConstructor(suppressConstructorProperties = true)
 public class BoardData {
 
     private String roomId;

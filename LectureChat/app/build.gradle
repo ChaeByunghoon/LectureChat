@@ -28,10 +28,13 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     compile 'com.google.android.gms:play-services-auth:11.4.2'
     compile 'com.google.firebase:firebase-auth:11.4.2'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
+    annotationProcessor "org.projectlombok:lombok:1.16.12"
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
     provided 'org.projectlombok:lombok:1.16.12'
 
 }

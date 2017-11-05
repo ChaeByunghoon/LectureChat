@@ -40,6 +40,8 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
 
         itemHolder.roomTitle.setText(chatRoomItems.get(position).getRoomTitle());
         itemHolder.currentChat.setText(chatRoomItems.get(position).getCurrentChat());
+        // TODO : 최근 메시지 날짜 가져와서 날짜 텍스트뷰 수정
+        // itemHolder.chatTime.setText();
     }
 
     @Override
@@ -48,12 +50,13 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
     }
     private class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView roomImg;
-        private TextView roomTitle,currentChat;
+        private TextView roomTitle,currentChat,chatTime;
         private ViewHolder(View view) {
             super(view);
             roomImg = view.findViewById(R.id.img_chatRoomItem_roomImg);
             roomTitle = view.findViewById(R.id.tv_chatRoomItem_roomName);
             currentChat = view.findViewById(R.id.tv_chatRoomItem_currentChat);
+            chatTime = view.findViewById(R.id.tv_chatRoomItem_Time);
         }
     }
 

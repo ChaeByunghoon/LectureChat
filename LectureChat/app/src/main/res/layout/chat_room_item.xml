@@ -4,14 +4,17 @@
     android:layout_height="80dp"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/img_chatRoomItem_roomImg"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="16dp"
-        tools:src="@drawable/ic_launcher_background"
-        />
+        android:src="@drawable/googleg_standard_color_18"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#795548"/>
+
     <RelativeLayout
         android:id="@+id/wrapper_chatRoomItem_textWrapper"
         android:layout_width="wrap_content"
@@ -37,6 +40,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_chatRoomItem_roomName"
             tools:text="ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
+            />
+
+        <TextView
+            android:id="@+id/tv_chatRoomItem_Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignBaseline="@id/tv_chatRoomItem_roomName"
+            android:layout_marginEnd="16dp"
+            tools:text="오후 4:28"
             />
 
 
