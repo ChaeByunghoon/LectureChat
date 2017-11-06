@@ -14,16 +14,20 @@ import kr.co.hoonki.lecturechat.Chat.ChatFragment;
 public class PagerAdapter extends FragmentPagerAdapter {
 
     private static int PAGE_NUMBER = 2;
+    private String roomKey;
 
-    public PagerAdapter(FragmentManager fm){
+    public PagerAdapter(FragmentManager fm,String roomKey){
         super(fm);
+        this.roomKey = roomKey;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new ChatFragment();
+                ChatFragment chatFragment = new ChatFragment();
+                chatFragment.setRoomKey(roomKey);
+                return chatFragment;
             case 1:
                 return new BoardFragment();
             default:

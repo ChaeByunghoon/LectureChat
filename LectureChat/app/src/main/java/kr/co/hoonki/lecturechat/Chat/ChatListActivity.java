@@ -74,7 +74,7 @@ public class ChatListActivity extends AppCompatActivity {
 //                Log.d("ChatListActivity", "SignOut");
 //                checkLogin();
             }
-       });
+        });
 
         btnSearch = (Button) findViewById(R.id.btn_chatList_search);
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -86,9 +86,9 @@ public class ChatListActivity extends AppCompatActivity {
         });
     }
 
-    private void checkLogin(){
+    private void checkLogin() {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if(mFirebaseUser == null){
+        if (mFirebaseUser == null) {
 
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -109,9 +109,10 @@ public class ChatListActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot chatroomlistSnapshot : dataSnapshot.getChildren()) {
-                    String roomKey = chatroomlistSnapshot.getKey();
+                    final String roomKey = chatroomlistSnapshot.getKey();
 
                     DatabaseReference ref = mFirebaseDatabase.getReference("Room").child(roomKey);
+
                     ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -121,7 +122,7 @@ public class ChatListActivity extends AppCompatActivity {
                             roomImageUrl = (String) dataSnapshot.child("roomImage").getValue();
 
                             if (roomTitle != null) {
-                                ChatRoomItem item = new ChatRoomItem("", "", "");
+                                ChatRoomItem item = new ChatRoomItem("", "", "","",roomKey);
                                 item.setRoomTitle(roomTitle);
                                 item.setRoomImgUrl(roomImageUrl);
 

@@ -10,13 +10,14 @@ public class ChatBoardActivity extends AppCompatActivity {
 
     PagerAdapter pagerAdapter;
     ViewPager viewPager;
+    String roomKey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_board);
         viewPager = findViewById(R.id.pager_chatBoard_viewPager);
-        pagerAdapter = new PagerAdapter(getSupportFragmentManager());
-
+        roomKey = getIntent().getStringExtra("roomUid");
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager(),roomKey);
         viewPager.setAdapter(pagerAdapter);
     }
     @OnClick(R.id.btn_chatBoard_chat)
