@@ -1,13 +1,15 @@
 package kr.co.hoonki.lecturechat;
 
 import android.content.Intent;
+
+import android.net.Uri;
+
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -23,11 +25,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import kr.co.hoonki.lecturechat.Chat.ChatListActivity;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     GoogleApiClient mGoogleApiClient;
     static final int RC_GOOGLE_SIGN_IN = 9001;
@@ -46,6 +54,21 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
+                    // UID specific to the provider
+                    String uid = user.getUid();
+
+                    // Name, email address, and profile photo Url
+                    String name = user.getDisplayName();
+                    Uri photoUrl = user.getPhotoUrl();
+
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("User").child(uid);
+
+                    Map<String, String> userData = new HashMap<>();
+                    userData.put("userName", name);
+                    userData.put("userImageUrl", photoUrl.toString());
+                    myRef.setValue(userData);
+
                     Intent intent = new Intent(LoginActivity.this,ChatListActivity.class);
                     startActivity(intent);
                     finish();
@@ -54,15 +77,18 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 }
             }
         };
+
         //Google
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +114,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        Log.d(TAG,requestCode+"");
         if (requestCode == RC_GOOGLE_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if(result.isSuccess()){
@@ -106,15 +133,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
-
-                    // If sign in fails, display a message to the user. If sign in succeeds
-                    // the auth state listener will be notified and logic to handle the
-                    // signed in user can be handled in the listener.
                     if (!task.isSuccessful()) {
                         FirebaseException e = (FirebaseException) task.getException();
                         Log.e(TAG, "Failed Registration", e);
                     }else {
-                        // Toast.makeText(LoginActivity.this, "FireBase 아이디 생성이 완료 되었습니다", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "FireBase 아이디 생성이 완료 되었습니다", Toast.LENGTH_SHORT).show();
                     }
 
                 }

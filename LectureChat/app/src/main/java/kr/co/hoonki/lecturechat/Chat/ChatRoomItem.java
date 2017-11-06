@@ -1,6 +1,4 @@
 package kr.co.hoonki.lecturechat.Chat;
-import android.widget.ImageView;
-
 import lombok.Data;
 
 /**
