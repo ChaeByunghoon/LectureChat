@@ -40,9 +40,14 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
         ViewHolder itemHolder = (ViewHolder) holder;
 
         itemHolder.roomTitle.setText(chatRoomItems.get(position).getRoomTitle());
-        itemHolder.currentChat.setText(chatRoomItems.get(position).getCurrentChat());
+        if (!itemHolder.currentChat.getText().equals("")) {
+            itemHolder.currentChat.setText(chatRoomItems.get(position).getCurrentChat());
+        }
+        else {
+            itemHolder.currentChat.setText("최근 대화가 없습니다.");
+        }
         // TODO : 최근 메시지 날짜 가져와서 날짜 텍스트뷰 수정
-        // itemHolder.chatTime.setText();
+        itemHolder.chatTime.setText("날짜");
 
         String roomImgUrl = chatRoomItems.get(position).getRoomImgUrl();
         if (!roomImgUrl.equals("")) {
