@@ -1,4 +1,6 @@
 package kr.co.hoonki.lecturechat.Chat;
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +12,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChatRoomItem {
+public class ChatRoomItem implements Serializable {
+    private String chatUid;
     private String roomImgUrl;
     private String roomTitle;
     private String currentChat;
