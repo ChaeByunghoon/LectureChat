@@ -11,6 +11,12 @@ public class ChatRoomItem {
     private String roomTitle;
     private String currentChat;
 
+    public ChatRoomItem(String roomTitle, String roomImgUrl, String currentChat) {
+        setRoomTitle(roomTitle);
+        setRoomImgUrl(roomImgUrl);
+        setCurrentChat(currentChat);
+    }
+
     public String getRoomImgUrl(){
         return roomImgUrl;
     }

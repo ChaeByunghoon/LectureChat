@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 import kr.co.hoonki.lecturechat.R;
 
@@ -22,13 +25,11 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
     private Context context;
     private ArrayList<ChatRoomItem> chatRoomItems;
 
-    public ChatRoomAdapter(ArrayList items, Context mContext){
-
-    }
+    public ChatRoomAdapter(Context context) { this.context = context; this.chatRoomItems = new ArrayList<>(); }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_room_item,parent);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_room_item, parent, false);
         ViewHolder holder = new ViewHolder(v);
         return holder;
 
@@ -42,6 +43,11 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
         itemHolder.currentChat.setText(chatRoomItems.get(position).getCurrentChat());
         // TODO : 최근 메시지 날짜 가져와서 날짜 텍스트뷰 수정
         // itemHolder.chatTime.setText();
+
+        String roomImgUrl = chatRoomItems.get(position).getRoomImgUrl();
+        if (!roomImgUrl.equals("")) {
+            Picasso.with(context).load(chatRoomItems.get(position).getRoomImgUrl()).into(itemHolder.roomImg);
+        }
     }
 
     @Override
@@ -57,6 +63,12 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
             roomTitle = view.findViewById(R.id.tv_chatRoomItem_roomName);
             currentChat = view.findViewById(R.id.tv_chatRoomItem_currentChat);
             chatTime = view.findViewById(R.id.tv_chatRoomItem_Time);
+        }
+    }
+
+    public void addItem(ChatRoomItem item) {
+        if (item != null) {
+            chatRoomItems.add(item);
         }
     }
 
