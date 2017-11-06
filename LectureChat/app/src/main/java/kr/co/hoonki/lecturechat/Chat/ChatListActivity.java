@@ -24,6 +24,7 @@ public class ChatListActivity extends AppCompatActivity {
     private ChatRoomAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private FloatingActionButton btnChatRoomAdd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +41,8 @@ public class ChatListActivity extends AppCompatActivity {
        /* adapter = new ChatRoomAdapter()
         recyclerView.setAdapter(adapter);*/
 
-       btnChatRoomAdd = findViewById(R.id.btn_chatList_add);
-       btnChatRoomAdd.setOnClickListener(new View.OnClickListener() {
+        btnChatRoomAdd = findViewById(R.id.btn_chatList_add);
+        btnChatRoomAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Intent intent = new Intent(ChatListActivity.this, ChatRoomSearchActivity.class);
@@ -50,19 +51,19 @@ public class ChatListActivity extends AppCompatActivity {
                 Log.d("ChatListActivity", "SignOut");
                 checkLogin();
             }
-       });
+        });
 
     }
 
-    private void checkLogin(){
+    private void checkLogin() {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if(mFirebaseUser == null){
+        if (mFirebaseUser == null) {
 
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
 
-        }else{
+        } else {
             Log.d("ChatListActivity", mFirebaseUser.getUid());
         }
     }

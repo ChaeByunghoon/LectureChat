@@ -6,6 +6,7 @@ package kr.co.hoonki.lecturechat.Model;
 
 public class ChatData {
 
+    private String userId;
     private String userName;
     private String message;
     private String sendTime;
