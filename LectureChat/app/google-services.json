@@ -15,12 +15,20 @@
       },
       "oauth_client": [
         {
-          "client_id": "320273886558-n9dr0v4bbb7sf673n2q9305ovgcvtobc.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "320273886558-ojmuqeq6o2pfsrtqn5d2b62ktqi4ibjl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.co.hoonki.lecturechat",
+            "certificate_hash": "647755be67a1196579de4d06aff06366c1e7dd01"
+          }
         },
         {
-          "client_id": "320273886558-vffni0h3haj1ieq9j1j6853ddnphv2v4.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "320273886558-ijhlieq4fgk80s8ea4snadhj7nntbof1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.co.hoonki.lecturechat",
+            "certificate_hash": "a3e66a3d6e2306660322bc99c1e7557bf4e2676b"
+          }
         },
         {
           "client_id": "320273886558-vvp0gjmhn4onclepvl57vcbu4m8maqop.apps.googleusercontent.com",
@@ -29,6 +37,14 @@
             "package_name": "kr.co.hoonki.lecturechat",
             "certificate_hash": "9cba6397eaa1f35fbeed5c4f571fef305f28d634"
           }
+        },
+        {
+          "client_id": "320273886558-n9dr0v4bbb7sf673n2q9305ovgcvtobc.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "320273886558-vffni0h3haj1ieq9j1j6853ddnphv2v4.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [

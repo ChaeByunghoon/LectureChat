@@ -1,7 +1,6 @@
 package kr.co.hoonki.lecturechat.Chat;
 
 import android.app.Activity;
-import android.app.Instrumentation;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,12 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-import java.util.ArrayList;
-
-import butterknife.OnClick;
 import kr.co.hoonki.lecturechat.LoginActivity;
 import kr.co.hoonki.lecturechat.R;
 
