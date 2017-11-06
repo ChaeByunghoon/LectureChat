@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.squareup.picasso.Picasso;
 
@@ -26,6 +27,11 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
 
     public ChatRoomAdapter(List<ChatRoomItem> items, Context mContext){
         this.items = items;
+        this. context =mContext;
+    }
+
+    public ChatRoomAdapter(Context mContext){
+        this.items = new ArrayList<>();
         this. context =mContext;
     }
 

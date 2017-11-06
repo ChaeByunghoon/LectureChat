@@ -35,14 +35,11 @@ public class ChatListActivity extends AppCompatActivity {
     private FloatingActionMenu materialDesignFAM;
     private FloatingActionButton btnChatRoomAdd;
 
-<<<<<<< HEAD
-=======
     private Button btnSearch;
 
     private final String TAG = "ChatListActivity";
     private final int CREATE_REQUEST = 101;
 
->>>>>>> 3ec4af85b90387f647552e9a3ae77f8bbc126d53
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +56,6 @@ public class ChatListActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-<<<<<<< HEAD
-        btnChatRoomAdd = findViewById(R.id.btn_chatList_add);
-        btnChatRoomAdd.setOnClickListener(new View.OnClickListener() {
-=======
        // @TODO : ChatRoomItem 정보 가져옴
         getChatRoomData();
 
@@ -73,7 +66,6 @@ public class ChatListActivity extends AppCompatActivity {
        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
        btnChatRoomAdd = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
        btnChatRoomAdd.setOnClickListener(new View.OnClickListener() {
->>>>>>> 3ec4af85b90387f647552e9a3ae77f8bbc126d53
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChatListActivity.this, ChatCreateActivity.class);
@@ -102,13 +94,8 @@ public class ChatListActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
 
-<<<<<<< HEAD
-        } else {
-            Log.d("ChatListActivity", mFirebaseUser.getUid());
-=======
         }else{
 //            Log.d("ChatListActivity", mFirebaseUser.getUid());
->>>>>>> 3ec4af85b90387f647552e9a3ae77f8bbc126d53
         }
     }
 
@@ -134,7 +121,7 @@ public class ChatListActivity extends AppCompatActivity {
                             roomImageUrl = (String) dataSnapshot.child("roomImage").getValue();
 
                             if (roomTitle != null) {
-                                ChatRoomItem item = new ChatRoomItem("", "", "");
+                                ChatRoomItem item = new ChatRoomItem("", "", "","");
                                 item.setRoomTitle(roomTitle);
                                 item.setRoomImgUrl(roomImageUrl);
 
