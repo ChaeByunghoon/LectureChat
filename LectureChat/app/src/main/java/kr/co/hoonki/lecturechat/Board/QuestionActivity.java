@@ -1,5 +1,6 @@
 package kr.co.hoonki.lecturechat.Board;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import kr.co.hoonki.lecturechat.Model.BoardData;
 import kr.co.hoonki.lecturechat.R;
@@ -28,6 +30,7 @@ public class QuestionActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
+    private String roomId;
 
 
     @Override
@@ -35,6 +38,8 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
+        Intent intent = getIntent();
+        roomId = intent.getStringExtra("roomId");
         mDatabase = FirebaseDatabase.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -69,11 +74,13 @@ public class QuestionActivity extends AppCompatActivity {
 
         long now = System.currentTimeMillis();
         Date date = new Date(now);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 mm월 dd일 hh시");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-h", Locale.KOREA);
         String currentDate = dateFormat.format(date);
-        BoardData boardData = new BoardData("611",firebaseUser.getProviderId(),currentDate,"911",title,content);
+        BoardData boardData = new BoardData("611",firebaseUser.getUid(),currentDate,title,content);
 
-        mDatabase.child("boardData").setValue(boardData);
+        mDatabase.child("boardData").push().setValue(boardData);
+
+        finish();
 
     }
 }
