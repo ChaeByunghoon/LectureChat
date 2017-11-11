@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,12 @@ import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,7 +60,7 @@ import java.net.URL;
 import kr.co.hoonki.lecturechat.LoginActivity;
 import kr.co.hoonki.lecturechat.R;
 
-public class ChatListActivity extends AppCompatActivity {
+public class ChatListActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -78,7 +85,6 @@ public class ChatListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_list);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
         checkLogin();
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -98,20 +104,17 @@ public class ChatListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ChatListActivity.this, ChatCreateActivity.class);
                 startActivityForResult(intent, CREATE_REQUEST);
-//                mFirebaseAuth.signOut();
-//                Log.d("ChatListActivity", "SignOut");
-//                checkLogin();
             }
        });
 
-//        btnSearch = (Button) findViewById(R.id.btn_chatList_search);
-//        btnSearch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ChatListActivity.this, ChatRoomSearchActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        btnSearch = (Button) findViewById(R.id.btn_chatList_search);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatListActivity.this, ChatRoomSearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
         DrawerImageLoader.init(new AbstractDrawerImageLoader() {
             @Override
@@ -160,6 +163,7 @@ public class ChatListActivity extends AppCompatActivity {
         //if you want to update the items at a later time it is recommended to keep it in a variable
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Home").withIcon(GoogleMaterial.Icon.gmd_home);
         SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName("Setting").withIcon(GoogleMaterial.Icon.gmd_settings);
+        SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(3).withName("Logout").withIcon(GoogleMaterial.Icon.gmd_power_settings_new);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_chatList);
         //create the drawer and remember the `Drawer` result object
@@ -169,12 +173,17 @@ public class ChatListActivity extends AppCompatActivity {
                 .addDrawerItems(
                         item1,
                         new DividerDrawerItem(),
-                        item2
+                        item2,
+                        item3
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         // do something with the clicked item :D
+                        if (drawerItem.getIdentifier() == 3) {
+                            mFirebaseAuth.signOut();
+                            checkLogin();
+                        }
                         return true;
                     }
                 })
@@ -252,10 +261,14 @@ public class ChatListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK) {
-            if (resultCode == CREATE_REQUEST) {
+            if (requestCode == CREATE_REQUEST) {
                 getChatRoomData();
             }
         }
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }

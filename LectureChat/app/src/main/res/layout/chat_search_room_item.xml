@@ -6,7 +6,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/img_chatRoomSearchItem_roomImg"
+        android:id="@+id/img_chatSearchRoomItem_roomImg"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
@@ -16,16 +16,16 @@
         app:civ_border_color="#795548"/>
 
     <RelativeLayout
-        android:id="@+id/wrapper_chatRoomSearchItem_textWrapper"
+        android:id="@+id/wrapper_chatSearchRoomItem_textWrapper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/img_chatRoomSearchItem_roomImg"
+        android:layout_toEndOf="@+id/img_chatSearchRoomItem_roomImg"
         android:layout_centerVertical="true"
         android:layout_marginStart="16dp"
 
         >
         <TextView
-            android:id="@+id/tv_chatRoomSearchItem_roomName"
+            android:id="@+id/tv_chatSearchRoomItem_roomName"
             tools:text="인간 행동과 심리"
             android:textStyle="bold"
             android:textColor="#333333"
@@ -33,6 +33,16 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:textSize="16dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_chatSearchRoomItem_Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignBaseline="@id/tv_chatSearchRoomItem_roomName"
+            android:layout_marginEnd="16dp"
+            tools:text="17/11/11"
             />
     </RelativeLayout>
 
