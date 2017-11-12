@@ -105,7 +105,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
                 Intent intent = new Intent(ChatListActivity.this, ChatCreateActivity.class);
                 startActivityForResult(intent, CREATE_REQUEST);
             }
-       });
+        });
 
         btnSearch = (Button) findViewById(R.id.btn_chatList_search);
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -195,9 +195,9 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
         txtTitle.setText("채팅방 목록");
     }
 
-    private void checkLogin(){
+    private void checkLogin() {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if(mFirebaseUser == null){
+        if (mFirebaseUser == null) {
 
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -218,9 +218,10 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot chatroomlistSnapshot : dataSnapshot.getChildren()) {
-                    String roomKey = chatroomlistSnapshot.getKey();
+                    final String roomKey = chatroomlistSnapshot.getKey();
 
                     DatabaseReference ref = mFirebaseDatabase.getReference("Room").child(roomKey);
+
                     ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -230,7 +231,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
                             roomImageUrl = (String) dataSnapshot.child("roomImage").getValue();
 
                             if (roomTitle != null) {
-                                ChatRoomItem item = new ChatRoomItem("", "", "");
+                                ChatRoomItem item = new ChatRoomItem("", "", "","",roomKey);
                                 item.setRoomTitle(roomTitle);
                                 item.setRoomImgUrl(roomImageUrl);
 

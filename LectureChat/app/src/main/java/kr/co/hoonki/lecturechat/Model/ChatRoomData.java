@@ -15,5 +15,7 @@ public class ChatRoomData {
     private String updateDate;
     private int userCount;
     private List<String> userIds;
+    private List<ChatData> chats;
+    private List<BoardData> bords;
 
 }

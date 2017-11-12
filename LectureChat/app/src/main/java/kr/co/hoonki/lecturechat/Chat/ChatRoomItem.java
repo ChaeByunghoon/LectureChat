@@ -1,43 +1,21 @@
 package kr.co.hoonki.lecturechat.Chat;
-import android.widget.ImageView;
+import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Created by chaebyeonghun on 2017. 11. 2..
  */
 
-public class ChatRoomItem {
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class ChatRoomItem implements Serializable {
+    private String chatUid;
     private String roomImgUrl;
     private String roomTitle;
     private String currentChat;
-
-    public ChatRoomItem(String roomTitle, String roomImgUrl, String currentChat) {
-        setRoomTitle(roomTitle);
-        setRoomImgUrl(roomImgUrl);
-        setCurrentChat(currentChat);
-    }
-
-    public String getRoomImgUrl(){
-        return roomImgUrl;
-    }
-
-    public String getCurrentChat() {
-        return currentChat;
-    }
-
-    public String getRoomTitle() {
-        return roomTitle;
-    }
-
-    public void setCurrentChat(String currentChat) {
-        this.currentChat = currentChat;
-    }
-
-    public void setRoomImgUrl(String roomImgUrl) {
-        this.roomImgUrl = roomImgUrl;
-    }
-
-    public void setRoomTitle(String roomTitle) {
-        this.roomTitle = roomTitle;
-    }
+    private String currentChatDate;
 }
