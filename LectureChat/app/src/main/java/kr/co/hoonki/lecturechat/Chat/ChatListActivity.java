@@ -85,7 +85,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
         setContentView(R.layout.activity_chat_list);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        checkLogin();
+        if (!checkLogin()) return;
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
@@ -195,16 +195,18 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
         txtTitle.setText("채팅방 목록");
     }
 
-    private void checkLogin() {
+    private boolean checkLogin() {
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         if (mFirebaseUser == null) {
 
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
+            return false;
 
-        }else{
+        } else {
             Log.d("ChatListActivity", mFirebaseUser.getUid());
+            return true;
         }
     }
 

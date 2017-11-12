@@ -76,7 +76,7 @@ public class ChatFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        })
+        });
     }
 
     private void checkLogin() {
