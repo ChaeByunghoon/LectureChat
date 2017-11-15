@@ -20,16 +20,15 @@ import kr.co.hoonki.lecturechat.R;
 public class BoardAdapter extends RecyclerView.Adapter {
 
     private List<BoardData> boardDatas;
-    private Context context;
 
-    public BoardAdapter(Context context, List<BoardData> boardDatas){
-        this.context = context;
+    public BoardAdapter(List<BoardData> boardDatas){
+
         this.boardDatas = boardDatas;
 
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.board_item,parent);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.board_item,parent,false);
         ViewHolder holder = new ViewHolder(v);
         return holder;
     }
@@ -55,7 +54,6 @@ public class BoardAdapter extends RecyclerView.Adapter {
     private class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView writer, title, comment, date;
-        private ImageView imageView;
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -63,8 +61,14 @@ public class BoardAdapter extends RecyclerView.Adapter {
             title = itemView.findViewById(R.id.tv_boardItem_title);
             comment = itemView.findViewById(R.id.tv_boardItem_comment);
             date = itemView.findViewById(R.id.tv_boardItem_date);
-            imageView = itemView.findViewById(R.id.img_boardItem_image);
 
         }
+    }
+
+    public void addItem(BoardData boardData){
+        if(boardData != null){
+            boardDatas.add(boardData);
+        }
+        notifyDataSetChanged();
     }
 }

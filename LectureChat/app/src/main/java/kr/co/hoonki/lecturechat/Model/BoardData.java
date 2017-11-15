@@ -13,8 +13,14 @@ import lombok.Data;
 public class BoardData {
 
     private String roomId;
+    private String boardId;
     private String createUserId;
     private String createDate;
     private String title;
     private String content;
+
+
+    public BoardData(){
+
+    }
 }

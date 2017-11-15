@@ -4,6 +4,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ChatBoardActivity extends AppCompatActivity {
@@ -15,8 +16,9 @@ public class ChatBoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_board);
+        ButterKnife.bind(this);
         viewPager = findViewById(R.id.pager_chatBoard_viewPager);
-        roomKey = getIntent().getStringExtra("roomUid");
+        //roomKey = getIntent().getStringExtra("roomUid");
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(),roomKey);
         viewPager.setAdapter(pagerAdapter);
     }

@@ -57,6 +57,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import kr.co.hoonki.lecturechat.ChatBoardActivity;
 import kr.co.hoonki.lecturechat.LoginActivity;
 import kr.co.hoonki.lecturechat.R;
 
@@ -83,6 +86,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_list);
+        ButterKnife.bind(this);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         if (!checkLogin()) return;
@@ -273,5 +277,10 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+    @OnClick(R.id.testButton)
+    public void testClick(){
+        Intent intent = new Intent(ChatListActivity.this, ChatBoardActivity.class);
+        startActivity(intent);
     }
 }

@@ -3,7 +3,7 @@
     package="kr.co.hoonki.lecturechat">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +23,8 @@
         <activity android:name=".ChatBoardActivity" />
         <activity android:name=".Board.QuestionActivity" />
         <activity android:name=".Chat.ChatRoomSearchActivity" />
-        <activity android:name=".Chat.ChatCreateActivity"></activity>
+        <activity android:name=".Chat.ChatCreateActivity" />
+        <activity android:name=".Board.BoardContentActivity"></activity>
     </application>
 
 </manifest>
