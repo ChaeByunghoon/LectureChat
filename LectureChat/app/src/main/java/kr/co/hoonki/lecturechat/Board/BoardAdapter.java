@@ -1,11 +1,13 @@
 package kr.co.hoonki.lecturechat.Board;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -17,13 +19,15 @@ import kr.co.hoonki.lecturechat.R;
  * Created by chaebyeonghun on 2017. 11. 4..
  */
 
-public class BoardAdapter extends RecyclerView.Adapter {
+public class BoardAdapter extends RecyclerView.Adapter{
 
     private List<BoardData> boardDatas;
+    private Context context;
 
-    public BoardAdapter(List<BoardData> boardDatas){
+    public BoardAdapter(List<BoardData> boardDatas,Context context){
 
         this.boardDatas = boardDatas;
+        this.context = context;
 
     }
     @Override
@@ -38,11 +42,20 @@ public class BoardAdapter extends RecyclerView.Adapter {
 
         ViewHolder viewHolder = (ViewHolder)holder;
 
-        BoardData boardItem = boardDatas.get(position);
+        final BoardData boardItem = boardDatas.get(position);
 
         viewHolder.writer.setText(boardItem.getCreateUserId());
         viewHolder.title.setText(boardItem.getTitle());
         viewHolder.date.setText(boardItem.getCreateDate());
+
+        viewHolder.wrapper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, BoardContentActivity.class);
+                intent.putExtra("boardId", boardItem.getBoardId());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -53,10 +66,11 @@ public class BoardAdapter extends RecyclerView.Adapter {
 
     private class ViewHolder extends RecyclerView.ViewHolder{
 
+        private RelativeLayout wrapper;
         private TextView writer, title, comment, date;
         public ViewHolder(View itemView) {
             super(itemView);
-
+            wrapper = itemView.findViewById(R.id.wrapper_boardItem_wrapper);
             writer = itemView.findViewById(R.id.tv_boardItem_writer);
             title = itemView.findViewById(R.id.tv_boardItem_title);
             comment = itemView.findViewById(R.id.tv_boardItem_comment);
@@ -71,4 +85,5 @@ public class BoardAdapter extends RecyclerView.Adapter {
         }
         notifyDataSetChanged();
     }
+
 }

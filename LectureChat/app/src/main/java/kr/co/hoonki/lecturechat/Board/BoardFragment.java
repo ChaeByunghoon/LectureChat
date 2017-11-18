@@ -50,8 +50,10 @@ public class BoardFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        boardAdapter = new BoardAdapter(new ArrayList<BoardData>());
+        boardAdapter = new BoardAdapter(new ArrayList<BoardData>(),getActivity());
         recyclerView.setAdapter(boardAdapter);
+
+
 
 
 
@@ -64,11 +66,7 @@ public class BoardFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 BoardData boardData = dataSnapshot.getValue(BoardData.class);
-
-                Log.e("why?",boardData.getTitle());
                 boardAdapter.addItem(boardData);
-
-
             }
 
             @Override
