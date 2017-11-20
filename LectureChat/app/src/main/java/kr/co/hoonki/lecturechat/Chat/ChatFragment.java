@@ -54,7 +54,7 @@ public class ChatFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 ChatData chatData = dataSnapshot.getValue(ChatData.class);
-                
+
             }
 
             @Override
@@ -76,7 +76,7 @@ public class ChatFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        })
+        });
     }
 
     private void checkLogin() {
