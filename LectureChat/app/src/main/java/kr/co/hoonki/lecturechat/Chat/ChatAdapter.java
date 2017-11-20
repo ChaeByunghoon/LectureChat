@@ -15,6 +15,7 @@ import java.util.List;
 import kr.co.hoonki.lecturechat.Board.BoardContentActivity;
 import kr.co.hoonki.lecturechat.Model.BoardData;
 import kr.co.hoonki.lecturechat.Model.ChatData;
+import kr.co.hoonki.lecturechat.Model.ChatDataViewDTO;
 import kr.co.hoonki.lecturechat.R;
 
 /**
@@ -23,10 +24,10 @@ import kr.co.hoonki.lecturechat.R;
 
 public class ChatAdapter extends RecyclerView.Adapter{
 
-    private List<ChatData> chatDatas;
+    private List<ChatDataViewDTO> chatDatas;
     private Context context;
 
-    public ChatAdapter(List<ChatData> boardDatas, Context context){
+    public ChatAdapter(List<ChatDataViewDTO> boardDatas, Context context){
 
         this.chatDatas = boardDatas;
         this.context = context;
@@ -44,14 +45,14 @@ public class ChatAdapter extends RecyclerView.Adapter{
 
         ViewHolder viewHolder = (ViewHolder)holder;
 
-        final ChatData chat = chatDatas.get(position);
-        if (chat.isMine()){
-            viewHolder.wrapper.setVisibility(View.GONE);
-            viewHolder.myText.setVisibility(View.VISIBLE);
+        final ChatDataViewDTO chat = chatDatas.get(position);
+        if (!chat.isMine()){
+            viewHolder.wrapper.setVisibility(View.VISIBLE);
+            viewHolder.myText.setVisibility(View.GONE);
             viewHolder.text.setText(chat.getMessage());
             viewHolder.name.setText(chat.getUserName());
         }else{
-            viewHolder.wrapper.setVisibility(View.VISIBLE);
+            viewHolder.wrapper.setVisibility(View.GONE);
             viewHolder.myText.setVisibility(View.VISIBLE);
             viewHolder.myText.setText(chat.getMessage());
         }
@@ -77,7 +78,7 @@ public class ChatAdapter extends RecyclerView.Adapter{
         }
     }
 
-    public void addItem(ChatData chatData){
+    public void addItem(ChatDataViewDTO chatData){
         if(chatData != null){
             chatDatas.add(chatData);
         }

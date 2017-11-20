@@ -18,7 +18,7 @@ public class ChatBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_board);
         ButterKnife.bind(this);
         viewPager = findViewById(R.id.pager_chatBoard_viewPager);
-        //roomKey = getIntent().getStringExtra("roomUid");
+        roomKey = getIntent().getStringExtra("roomUid");
         pagerAdapter = new PagerAdapter(getSupportFragmentManager(),roomKey);
         viewPager.setAdapter(pagerAdapter);
     }
