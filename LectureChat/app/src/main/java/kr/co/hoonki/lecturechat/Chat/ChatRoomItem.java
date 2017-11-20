@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  */
 
 @Data
-@AllArgsConstructor
+@AllArgsConstructor(suppressConstructorProperties = true)
 @NoArgsConstructor
 public class ChatRoomItem implements Serializable {
     private String chatUid;

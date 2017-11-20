@@ -3,13 +3,13 @@
     package="kr.co.hoonki.lecturechat">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".LoginActivity" />
@@ -23,7 +23,8 @@
         <activity android:name=".ChatBoardActivity" />
         <activity android:name=".Board.QuestionActivity" />
         <activity android:name=".Chat.ChatRoomSearchActivity" />
-        <activity android:name=".Chat.ChatCreateActivity"></activity>
+        <activity android:name=".Chat.ChatCreateActivity" />
+        <activity android:name=".Board.BoardContentActivity"></activity>
     </application>
 
 </manifest>

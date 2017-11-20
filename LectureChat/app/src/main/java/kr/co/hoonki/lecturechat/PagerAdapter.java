@@ -15,21 +15,24 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     private static int PAGE_NUMBER = 2;
     private String roomKey;
+    private ChatFragment chatFragment;
+    private BoardFragment boardFragment;
 
     public PagerAdapter(FragmentManager fm,String roomKey){
         super(fm);
         this.roomKey = roomKey;
+        chatFragment = new ChatFragment();
+        boardFragment = new BoardFragment();
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                ChatFragment chatFragment = new ChatFragment();
-                chatFragment.setRoomKey(roomKey);
+                //chatFragment.setRoomKey(roomKey);
                 return chatFragment;
             case 1:
-                return new BoardFragment();
+                return boardFragment;
             default:
                 return null;
         }

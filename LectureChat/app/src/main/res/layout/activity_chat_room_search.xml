@@ -15,28 +15,24 @@
         android:background="#333333">
 
         <Button
-            android:id="@+id/btn_chatSearchList_menu"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            />
-
-        <TextView
-            android:id="@+id/tv_chatSearchList_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Home"
-            android:textColor="#ffffff" />
-
-        <Button
-            android:id="@+id/btn_chatSearchList_search"
+            android:id="@+id/btn_chatSearchRoomList_search"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:background="@mipmap/ic_search_white_24dp"
             android:layout_marginEnd="8dp" />
+
+        <EditText
+            android:id="@+id/et_chatSearchRoomList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/btn_chatSearchRoomList_search"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:hint="채팅방 이름"
+            android:textColorHint="#cccccc"
+            android:textColor="#ffffff" />
 
     </RelativeLayout>
 

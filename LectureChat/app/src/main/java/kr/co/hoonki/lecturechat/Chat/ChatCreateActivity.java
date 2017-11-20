@@ -87,6 +87,8 @@ public class ChatCreateActivity extends AppCompatActivity {
                 myRef = database.getReference("User/" + firebaseUser.getUid() + "/chatRoomList/" + roomKey);
                 myRef.setValue(true);
 
+                setResult(RESULT_OK, getIntent());
+
                 finish();
             }
         });
@@ -94,6 +96,7 @@ public class ChatCreateActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setResult(RESULT_CANCELED, getIntent());
                 finish();
             }
         });

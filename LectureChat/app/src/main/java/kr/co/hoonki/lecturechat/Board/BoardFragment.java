@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,57 +20,53 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import kr.co.hoonki.lecturechat.Model.BoardData;
 import kr.co.hoonki.lecturechat.R;
 
 public class BoardFragment extends Fragment {
 
-    private RecyclerView recyclerView;
+    @BindView(R.id.rv_boardFragment_recyclerView)
+    RecyclerView recyclerView;
     private BoardAdapter boardAdapter;
     private DatabaseReference databaseRef;
-    private FloatingActionButton addButton;
 
     public BoardFragment() {
         // Required empty public constructor
     }
-    public static BoardFragment newInstance(){
-
-        Bundle args = new Bundle();
-
-        BoardFragment fragment = new BoardFragment();
-        fragment.setArguments(args);
-        return fragment;
-
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_board, container, false);
-        recyclerView = view.findViewById(R.id.rv_boardFragment_recyclerView);
+        ButterKnife.bind(this,view);
 
-        addButton = view.findViewById(R.id.btn_board_add);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        boardAdapter = new BoardAdapter(new ArrayList<BoardData>(),getActivity());
+        recyclerView.setAdapter(boardAdapter);
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),QuestionActivity.class);
-                startActivity(intent);
-            }
-        });
 
+
+
+
+        getData("611");
+        return view;
+    }
+    public void getData(final String roomkey){
         databaseRef = FirebaseDatabase.getInstance().getReference();
-
-        databaseRef.child("BoardData").addChildEventListener(new ChildEventListener() {
+        databaseRef.child("boardData").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-
+                BoardData boardData = dataSnapshot.getValue(BoardData.class);
+                boardAdapter.addItem(boardData);
             }
 
             @Override
@@ -93,9 +90,13 @@ public class BoardFragment extends Fragment {
             }
         });
 
-        return view;
     }
 
+    @OnClick(R.id.btn_board_add)
+    public void addClick(){
+        Intent intent = new Intent(getActivity(),QuestionActivity.class);
+        startActivity(intent);
+    }
 
 
 }

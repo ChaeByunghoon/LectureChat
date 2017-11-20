@@ -7,50 +7,46 @@
     android:layout_height="match_parent"
     tools:context="kr.co.hoonki.lecturechat.Chat.ChatListActivity">
 
-    <RelativeLayout
-        android:id="@+id/wrapper_chatList_nav_bar"
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar_chatList"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="#333333">
 
-        <Button
-            android:id="@+id/btn_chatList_menu"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:background="@mipmap/ic_menu_white_24dp"
-            />
-
         <TextView
-            android:id="@+id/tv_chatList_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Home"
-            android:textColor="#ffffff" />
+        android:id="@+id/tv_chatList_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_gravity="center"
+        android:text="Home"
+        android:textColor="#ffffff" />
 
         <Button
-            android:id="@+id/btn_chatList_search"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@mipmap/ic_search_white_24dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="8dp" />
+        android:id="@+id/btn_chatList_search"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/ic_search_white_24dp"
+        android:layout_gravity="right"
+        android:layout_marginEnd="8dp" />
 
-    </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_chatList_chatList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/wrapper_chatList_nav_bar"
+        android:layout_below="@+id/toolbar_chatList"
         >
 
     </android.support.v7.widget.RecyclerView>
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
 
     <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:id="@+id/btn_chatList_add"-->

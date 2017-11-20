@@ -64,10 +64,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference("User").child(uid);
 
-                    Map<String, String> userData = new HashMap<>();
+                    Map<String, Object> userData = new HashMap<>();
                     userData.put("userName", name);
                     userData.put("userImageUrl", photoUrl.toString());
-                    myRef.setValue(userData);
+                    myRef.updateChildren(userData);
 
                     Intent intent = new Intent(LoginActivity.this,ChatListActivity.class);
                     startActivity(intent);
@@ -114,7 +114,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        Log.d(TAG,requestCode+"");
         if (requestCode == RC_GOOGLE_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if(result.isSuccess()){
@@ -137,7 +136,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         FirebaseException e = (FirebaseException) task.getException();
                         Log.e(TAG, "Failed Registration", e);
                     }else {
-                        Toast.makeText(LoginActivity.this, "FireBase 아이디 생성이 완료 되었습니다", Toast.LENGTH_SHORT).show();
+
                     }
 
                 }

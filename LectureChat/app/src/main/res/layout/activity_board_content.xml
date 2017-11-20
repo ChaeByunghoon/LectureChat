@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.co.hoonki.lecturechat.Board.BoardContentActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ScrollView>
+    <RelativeLayout
+        android:id="@+id/wrapper_boardContent_nav"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#333333">
+
+        <ImageButton
+            android:id="@+id/btn_boardContent_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:src="@drawable/back" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wrapper_boardContent_nav"
+        android:layout_margin="16dp">
+
+        <RelativeLayout
+            android:id="@+id/wrapper_boardContent_writer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_boardContent_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="작성자 : "
+                android:textColor="#333333" />
+
+            <TextView
+                android:id="@+id/tv_boardContent_writer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/tv_boardContent_tv1"
+                android:textColor="#333333"
+                tools:text="채병훈" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/wrapper_boardContent_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/wrapper_boardContent_writer"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/tv_boardContent_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="제목 : "
+                android:textColor="#333333"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tv_boardContent_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/tv_boardContent_tv2"
+                android:textColor="#333333"
+                android:textSize="16dp"
+                tools:text="인행심 시험점수 나왔나요" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_boardContent_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/wrapper_boardContent_title"
+            android:layout_marginTop="16dp"
+            tools:text="이번에 시험이 좀 어려운것 같네요 잘 못본거같아요 아쉽네요 ㅠㅠㅠㅠㅠㅠㅠㅠ" />
+
+        <LinearLayout
+            android:id="@+id/wrapper_boardContent_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_boardContent_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="댓글"
+                android:textColor="#333333"
+                android:textSize="15dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_boardContent_commentList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+        <EditText
+            android:id="@+id/edt_boardContent_comment"
+            android:layout_width="0dip"
+            android:layout_weight="8"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            />
+
+        <Button
+            android:id="@+id/btn_boardContent_write"
+            android:layout_width="0dip"
+            android:layout_weight="2"
+            android:layout_height="50dp"
+            android:text="전송"
+            android:background="#ffffff"
+            />
+    </LinearLayout>
+</RelativeLayout>
