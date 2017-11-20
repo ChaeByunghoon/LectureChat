@@ -278,10 +278,4 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
-    @OnClick(R.id.testButton)
-    public void testClick() {
-        Intent intent = new Intent(ChatListActivity.this, ChatBoardActivity.class);
-        startActivity(intent);
-    }
 }
