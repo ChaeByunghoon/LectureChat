@@ -14,6 +14,7 @@ public class ChatData {
     private String userName;
     private String message;
     private String sendTime;
+    private boolean isMine = false;
 
 
 }

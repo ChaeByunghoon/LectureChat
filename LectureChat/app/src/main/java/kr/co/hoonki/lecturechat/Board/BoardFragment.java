@@ -52,11 +52,6 @@ public class BoardFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         boardAdapter = new BoardAdapter(new ArrayList<BoardData>(),getActivity());
         recyclerView.setAdapter(boardAdapter);
-
-
-
-
-
         getData("611");
         return view;
     }

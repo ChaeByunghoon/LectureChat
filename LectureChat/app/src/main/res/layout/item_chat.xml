@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/wrapper_chatItem_notMine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:visibility="gone"
+        >
+        <ImageView
+            android:id="@+id/img_chatItem_profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:padding="5dp"
+            android:src="@drawable/profile_default" />
+
+        <TextView
+            android:id="@+id/tv_chatItem_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/img_chatItem_profile"
+            android:layout_below="@id/img_chatItem_profile"
+            android:layout_marginLeft="5dp"
+            android:text="이름"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tv_chatItem_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/img_chatItem_profile"
+            android:layout_marginLeft="5dp"
+            android:background="#70b645"
+            android:maxWidth="250dp"
+            android:padding="5dp"
+            android:text="테스트 텍스트"
+            android:textColor="#000000" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_chatItem_myText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#dcb836"
+        android:maxWidth="250dp"
+        android:padding="5dp"
+        android:text="테스트 텍스트"
+        android:textColor="#000000" />
+</RelativeLayout>
