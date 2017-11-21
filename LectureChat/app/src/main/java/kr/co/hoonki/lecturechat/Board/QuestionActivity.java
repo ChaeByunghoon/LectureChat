@@ -76,7 +76,7 @@ public class QuestionActivity extends AppCompatActivity {
         Date date = new Date(now);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-h", Locale.KOREA);
         String currentDate = dateFormat.format(date);
-        BoardData boardData = new BoardData("611","911",firebaseUser.getDisplayName(),currentDate,title,content);
+        BoardData boardData = new BoardData(roomId,firebaseUser.getDisplayName(),currentDate,title,content);
 
         mDatabase.child("boardData").push().setValue(boardData);
 

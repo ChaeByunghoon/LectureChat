@@ -28,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import kr.co.hoonki.lecturechat.Model.BoardData;
+import kr.co.hoonki.lecturechat.Model.BoardDataViewDTO;
 import kr.co.hoonki.lecturechat.R;
 
 public class BoardFragment extends Fragment {
@@ -36,6 +37,7 @@ public class BoardFragment extends Fragment {
     RecyclerView recyclerView;
     private BoardAdapter boardAdapter;
     private DatabaseReference databaseRef;
+    String roomId;
 
     public BoardFragment() {
         // Required empty public constructor
@@ -50,9 +52,10 @@ public class BoardFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        boardAdapter = new BoardAdapter(new ArrayList<BoardData>(),getActivity());
+        roomId = getArguments().getString("roomKey");
+        boardAdapter = new BoardAdapter(new ArrayList<BoardDataViewDTO>(),getActivity(),roomId);
         recyclerView.setAdapter(boardAdapter);
-        getData("611");
+        getData(roomId);
         return view;
     }
     public void getData(final String roomkey){
@@ -61,7 +64,11 @@ public class BoardFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 BoardData boardData = dataSnapshot.getValue(BoardData.class);
-                boardAdapter.addItem(boardData);
+                if (boardData.getRoomId().equals(roomkey)){
+                    BoardDataViewDTO boardDataViewDTO = new BoardDataViewDTO(boardData,dataSnapshot.getKey());
+                    boardAdapter.addItem(boardDataViewDTO);
+                }
+
             }
 
             @Override
@@ -90,6 +97,8 @@ public class BoardFragment extends Fragment {
     @OnClick(R.id.btn_board_add)
     public void addClick(){
         Intent intent = new Intent(getActivity(),QuestionActivity.class);
+        Log.e("roomId",roomId);
+        intent.putExtra("roomId",roomId);
         startActivity(intent);
     }
 

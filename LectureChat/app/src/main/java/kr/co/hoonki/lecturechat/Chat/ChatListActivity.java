@@ -235,6 +235,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
 
                             roomTitle = (String) dataSnapshot.child("roomName").getValue();
                             roomImageUrl = (String) dataSnapshot.child("roomImage").getValue();
+                            adapter.setRoomName(roomTitle);
 
                             if (roomTitle != null) {
                                 ChatRoomItem item = new ChatRoomItem(roomKey, "", "", "", "");

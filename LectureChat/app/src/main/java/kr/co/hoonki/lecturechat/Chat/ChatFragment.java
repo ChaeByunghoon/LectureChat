@@ -74,7 +74,7 @@ public class ChatFragment extends Fragment {
                     Toast.makeText(getContext(), "내용을 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
                 ChatData chatData = new ChatData(mFirebaseUser.getUid(),mFirebaseUser.getDisplayName(),edt_input.getText().toString(),simpleDateFormat.format(new Date()));
                 mRef = mFirebaseDatabase.getReference("Room").child(roomKey).child("chats");
                 mRef.push().setValue(chatData);

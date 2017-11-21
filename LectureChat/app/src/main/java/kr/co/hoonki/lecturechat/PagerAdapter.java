@@ -27,6 +27,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
         bundle.putString("roomKey",roomKey);
         chatFragment.setArguments(bundle);
         boardFragment = new BoardFragment();
+        boardFragment.setArguments(bundle);
     }
 
     @Override
@@ -36,6 +37,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 //chatFragment.setRoomKey(roomKey);
                 return chatFragment;
             case 1:
+
                 return boardFragment;
             default:
                 return null;

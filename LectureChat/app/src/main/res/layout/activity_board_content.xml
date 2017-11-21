@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
 
     </ScrollView>
+
     <RelativeLayout
         android:id="@+id/wrapper_boardContent_nav"
         android:layout_width="match_parent"
@@ -31,12 +32,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/wrapper_boardContent_nav"
-        android:layout_margin="16dp">
+        >
 
         <RelativeLayout
             android:id="@+id/wrapper_boardContent_writer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            >
 
             <TextView
                 android:id="@+id/tv_boardContent_tv1"
@@ -61,7 +64,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/wrapper_boardContent_writer"
-            android:layout_marginTop="16dp">
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            >
 
             <TextView
                 android:id="@+id/tv_boardContent_tv2"
@@ -86,7 +92,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/wrapper_boardContent_title"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             tools:text="이번에 시험이 좀 어려운것 같네요 잘 못본거같아요 아쉽네요 ㅠㅠㅠㅠㅠㅠㅠㅠ" />
 
         <LinearLayout
@@ -98,11 +106,14 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_marginStart="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="댓글"
-                android:textColor="#333333"
-                android:textSize="15dp" />
+                android:textColor="#1E90FF"
+                android:textSize="15dp"
+                android:layout_marginBottom="8dp"
+                />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_boardContent_commentList"
@@ -116,28 +127,21 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
+
+    <EditText
+        android:id="@+id/edt_boardContent_comment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        >
+        android:background="#ffffff" />
 
-        <EditText
-            android:id="@+id/edt_boardContent_comment"
-            android:layout_width="0dip"
-            android:layout_weight="8"
-            android:layout_height="50dp"
-            android:background="#ffffff"
-            />
+    <Button
+        android:id="@+id/btn_boardContent_write"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="#ffffff"
+        android:text="전송" />
 
-        <Button
-            android:id="@+id/btn_boardContent_write"
-            android:layout_width="0dip"
-            android:layout_weight="2"
-            android:layout_height="50dp"
-            android:text="전송"
-            android:background="#ffffff"
-            />
-    </LinearLayout>
 </RelativeLayout>

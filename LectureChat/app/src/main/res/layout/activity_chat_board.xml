@@ -24,6 +24,16 @@
             android:id="@+id/btn_chatBoard_back"
             android:layout_marginStart="8dp"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_chatBoard_title"
+            android:layout_centerInParent="true"
+            tools:text="이냉심"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+
+            />
         <ImageButton
             android:layout_centerVertical="true"
             android:background="@null"

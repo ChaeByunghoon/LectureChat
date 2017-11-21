@@ -3,6 +3,7 @@ package kr.co.hoonki.lecturechat.Board;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import kr.co.hoonki.lecturechat.Model.BoardData;
+import kr.co.hoonki.lecturechat.Model.BoardDataViewDTO;
 import kr.co.hoonki.lecturechat.R;
 
 /**
@@ -21,13 +23,15 @@ import kr.co.hoonki.lecturechat.R;
 
 public class BoardAdapter extends RecyclerView.Adapter{
 
-    private List<BoardData> boardDatas;
+    private List<BoardDataViewDTO> boardDatas;
     private Context context;
+    private String roomId;
 
-    public BoardAdapter(List<BoardData> boardDatas,Context context){
+    public BoardAdapter(List<BoardDataViewDTO> boardDatas,Context context, String roomId){
 
         this.boardDatas = boardDatas;
         this.context = context;
+        this.roomId = roomId;
 
     }
     @Override
@@ -42,7 +46,7 @@ public class BoardAdapter extends RecyclerView.Adapter{
 
         ViewHolder viewHolder = (ViewHolder)holder;
 
-        final BoardData boardItem = boardDatas.get(position);
+        final BoardDataViewDTO boardItem = boardDatas.get(position);
 
         viewHolder.writer.setText(boardItem.getCreateUserId());
         viewHolder.title.setText(boardItem.getTitle());
@@ -52,7 +56,8 @@ public class BoardAdapter extends RecyclerView.Adapter{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, BoardContentActivity.class);
-                intent.putExtra("boardId", boardItem.getBoardId());
+                intent.putExtra("boardId",boardItem.getKey());
+                intent.putExtra("roomId",boardItem.getRoomId());
                 context.startActivity(intent);
             }
         });
@@ -79,7 +84,7 @@ public class BoardAdapter extends RecyclerView.Adapter{
         }
     }
 
-    public void addItem(BoardData boardData){
+    public void addItem(BoardDataViewDTO boardData){
         if(boardData != null){
             boardDatas.add(boardData);
         }
