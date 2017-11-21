@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/wrapper_commentItem_relativeLayout"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_commentItem_writer"
+        android:textColor="#333333"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textSize="15dp"
+        tools:text="김선재"
+        />
+    <TextView
+        android:id="@+id/tv_commentItem_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_commentItem_writer"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        tools:text="욜로~~~"
+        />
+    <TextView
+        android:id="@+id/tv_commentItem_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="2017년 9월 12일"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+
+
+        />
+    <View
+        android:background="#30000000"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tv_commentItem_content"
+        >
+
+    </View>
+
+
+</RelativeLayout>

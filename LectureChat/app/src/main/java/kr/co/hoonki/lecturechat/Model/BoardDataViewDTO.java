@@ -12,8 +12,9 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor(suppressConstructorProperties = true)
-public class BoardData implements Serializable{
+public class BoardDataViewDTO implements Serializable{
 
+    private String key;
     private String roomId;
     private String createUserId;
     private String createDate;
@@ -21,16 +22,13 @@ public class BoardData implements Serializable{
     private String content;
     private Map<String,CommentData> commentList;
 
-
-
-    public BoardData(){
-
-    }
-    public BoardData(String roomId, String createUserId, String createDate, String title, String content){
-        this.roomId = roomId;
-        this.createUserId = createUserId;
-        this.createDate = createDate;
-        this.title = title;
-        this.content = content;
+    public BoardDataViewDTO (BoardData boardData, String key){
+        this.roomId = boardData.getRoomId();
+        this.createUserId = boardData.getCreateUserId();
+        this.createDate = boardData.getCreateDate();
+        this.title = boardData.getTitle();
+        this.content = boardData.getContent();
+        this.commentList = boardData.getCommentList();
+        this.key = key;
     }
 }

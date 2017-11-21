@@ -27,10 +27,12 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private List<ChatRoomItem> chatRoomItems;
+    private String roomName;
 
-    public ChatRoomAdapter(List<ChatRoomItem> items, Context mContext){
+    public ChatRoomAdapter(List<ChatRoomItem> items, Context mContext,String roomName){
         this.chatRoomItems = items;
         this.context = mContext;
+        this.roomName = roomName;
     }
 
     public ChatRoomAdapter(Context mContext){
@@ -67,6 +69,7 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
             public void onClick(View view) {
                 Intent intent = new Intent(context, ChatBoardActivity.class);
                 intent.putExtra("roomUid",chatRoomItems.get(position).getChatUid());
+                intent.putExtra("roomName",roomName);
                 context.startActivity(intent);
             }
         });
@@ -95,6 +98,9 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
         if (item != null) {
             chatRoomItems.add(item);
         }
+    }
+    public void setRoomName(String roomName){
+        this.roomName = roomName;
     }
 
 }

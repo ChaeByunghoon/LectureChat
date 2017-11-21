@@ -30,6 +30,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import kr.co.hoonki.lecturechat.Model.ChatData;
 import kr.co.hoonki.lecturechat.R;
 import lombok.NonNull;
 
@@ -77,11 +78,12 @@ public class ChatCreateActivity extends AppCompatActivity {
                 String roomKey = myRef.push().getKey();
                 myRef = myRef.child(roomKey);
 
-                Map<String, String> userData = new HashMap<>();
+                Map<String, Object> userData = new HashMap<>();
                 userData.put("roomName", txtTitle.getText().toString());
                 userData.put("roomImage", txtPicture.getText().toString());
                 userData.put("createDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
                 userData.put("updateDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+                userData.put("chats",new ChatData());
                 myRef.setValue(userData);
 
                 myRef = database.getReference("User/" + firebaseUser.getUid() + "/chatRoomList/" + roomKey);

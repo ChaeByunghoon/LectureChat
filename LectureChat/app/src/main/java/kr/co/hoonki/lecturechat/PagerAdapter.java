@@ -1,5 +1,6 @@
 package kr.co.hoonki.lecturechat;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,6 +15,7 @@ import kr.co.hoonki.lecturechat.Chat.ChatFragment;
 public class PagerAdapter extends FragmentPagerAdapter {
 
     private static int PAGE_NUMBER = 2;
+    private static final String[] Titles = {"채팅방", "질문방"};
     private String roomKey;
     private ChatFragment chatFragment;
     private BoardFragment boardFragment;
@@ -22,7 +24,11 @@ public class PagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.roomKey = roomKey;
         chatFragment = new ChatFragment();
+        Bundle bundle = new Bundle(1);
+        bundle.putString("roomKey",roomKey);
+        chatFragment.setArguments(bundle);
         boardFragment = new BoardFragment();
+        boardFragment.setArguments(bundle);
     }
 
     @Override
@@ -32,9 +38,20 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 //chatFragment.setRoomKey(roomKey);
                 return chatFragment;
             case 1:
+
                 return boardFragment;
             default:
                 return null;
+        }
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        if (position < PAGE_NUMBER) {
+            return Titles[position];
+        }
+        else {
+            return "";
         }
     }
 
