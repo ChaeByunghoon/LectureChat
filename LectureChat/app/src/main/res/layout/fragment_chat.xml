@@ -5,9 +5,15 @@
     tools:context="kr.co.hoonki.lecturechat.Chat.ChatFragment">
 
 
-    <ListView
+    <!--<ListView-->
+        <!--android:id="@+id/lv_chatRoomList"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/lv_chatRoomList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>

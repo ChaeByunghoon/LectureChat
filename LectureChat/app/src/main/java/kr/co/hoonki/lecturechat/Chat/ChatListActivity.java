@@ -81,6 +81,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
 
     private final String TAG = "ChatListActivity";
     private final int CREATE_REQUEST = 101;
+    private final int SEARCH_REQUEST = 102;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +117,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChatListActivity.this, ChatRoomSearchActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, SEARCH_REQUEST);
             }
         });
 
@@ -269,6 +270,9 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
 
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CREATE_REQUEST) {
+                getChatRoomData();
+            }
+            else if (requestCode == SEARCH_REQUEST) {
                 getChatRoomData();
             }
         }

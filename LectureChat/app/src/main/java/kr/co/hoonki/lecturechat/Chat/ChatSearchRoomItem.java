@@ -10,11 +10,13 @@ public class ChatSearchRoomItem {
     private String roomImgUrl;
     private String roomTitle;
     private String roomDate;
+    private String chatUid;
 
-    public ChatSearchRoomItem(String roomTitle, String roomImgUrl, String roomDate) {
+    public ChatSearchRoomItem(String roomTitle, String roomImgUrl, String roomDate, String chatUid) {
         setRoomTitle(roomTitle);
         setRoomImgUrl(roomImgUrl);
         setRoomDate(roomDate);
+        setChatUid(chatUid);
     }
 
     public String getRoomImgUrl(){
@@ -27,6 +29,8 @@ public class ChatSearchRoomItem {
 
     public String getRoomDate() { return roomDate; }
 
+    public String getChatUid() { return chatUid; }
+
     public void setRoomImgUrl(String roomImgUrl) {
         this.roomImgUrl = roomImgUrl;
     }
@@ -36,5 +40,7 @@ public class ChatSearchRoomItem {
     }
 
     public void setRoomDate(String roomDate) { this.roomDate = roomDate; }
+
+    public void setChatUid(String chatUid) { this.chatUid = chatUid; }
 }
 
