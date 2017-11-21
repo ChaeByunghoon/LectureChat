@@ -1,5 +1,6 @@
 package kr.co.hoonki.lecturechat;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -22,6 +23,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.roomKey = roomKey;
         chatFragment = new ChatFragment();
+        Bundle bundle = new Bundle(1);
+        bundle.putString("roomKey",roomKey);
+        chatFragment.setArguments(bundle);
         boardFragment = new BoardFragment();
     }
 

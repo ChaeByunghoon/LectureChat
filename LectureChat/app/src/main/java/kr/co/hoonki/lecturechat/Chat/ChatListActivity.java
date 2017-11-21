@@ -101,9 +101,9 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
         // 채팅 정보 가져옴
         getChatRoomData();
 
-       materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
-       btnChatRoomAdd = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
-       btnChatRoomAdd.setOnClickListener(new View.OnClickListener() {
+        materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+        btnChatRoomAdd = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item1);
+        btnChatRoomAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChatListActivity.this, ChatCreateActivity.class);
@@ -151,7 +151,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
 
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
-                 .withHeaderBackground(R.drawable.header)
+                .withHeaderBackground(R.drawable.header)
                 .addProfiles(
                         new ProfileDrawerItem().withName(name).withEmail(email).withIcon(imgUri.toString())
                 )
@@ -169,7 +169,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
         SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName("Setting").withIcon(GoogleMaterial.Icon.gmd_settings);
         SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(3).withName("Logout").withIcon(GoogleMaterial.Icon.gmd_power_settings_new);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_chatList);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_chatList);
         //create the drawer and remember the `Drawer` result object
         Drawer result = new DrawerBuilder()
                 .withActivity(this)
@@ -237,7 +237,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
                             roomImageUrl = (String) dataSnapshot.child("roomImage").getValue();
 
                             if (roomTitle != null) {
-                                ChatRoomItem item = new ChatRoomItem("", "", "","",roomKey);
+                                ChatRoomItem item = new ChatRoomItem(roomKey, "", "", "", "");
                                 item.setRoomTitle(roomTitle);
                                 item.setRoomImgUrl(roomImageUrl);
 
@@ -277,10 +277,5 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-    }
-    @OnClick(R.id.testButton)
-    public void testClick(){
-        Intent intent = new Intent(ChatListActivity.this, ChatBoardActivity.class);
-        startActivity(intent);
     }
 }
