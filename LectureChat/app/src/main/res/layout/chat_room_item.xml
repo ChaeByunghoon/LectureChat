@@ -1,63 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/wrapper_chatRoomItem_totalWrapper"
+    android:id="@+id/wrapper_chatRoomItem_Wrapper"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
-
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/img_chatRoomItem_roomImg"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/googleg_standard_color_18"
-        app:civ_border_color="#795548"
-        app:civ_border_width="2dp" />
+    android:layout_height="80dp"
+    android:orientation="vertical" >
 
     <RelativeLayout
-        android:id="@+id/wrapper_chatRoomItem_textWrapper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="16dp"
-        android:layout_toEndOf="@+id/img_chatRoomItem_roomImg"
+        android:id="@+id/view_chatRoomItem_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fa315b" >
 
-        >
-
-        <TextView
-            android:id="@+id/tv_chatRoomItem_roomName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:textColor="#333333"
-            android:textStyle="bold"
-            tools:text="인간 행동과 심리" />
-
-        <TextView
-            android:id="@+id/tv_chatRoomItem_currentChat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_chatRoomItem_roomName"
-            tools:text="ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" />
-
-        <TextView
-            android:id="@+id/tv_chatRoomItem_Time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/tv_chatRoomItem_roomName"
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="16dp"
-            tools:text="오후 4:28" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_delete_white_24dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/delete_icon"
+            android:text="밀어서 삭제하기"
+            android:textColor="#fff"
+            android:textSize="13dp" />
 
     </RelativeLayout>
 
-    <View
+    <RelativeLayout
+        android:id="@+id/wrapper_chatRoomItem_totalWrapper"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/wrapper_chatRoomItem_textWrapper"
-        android:background="#30000000"></View>
+        android:layout_height="match_parent"
+        android:background="#fff" >
 
-</RelativeLayout>
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_chatRoomItem_roomImg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/googleg_standard_color_18"
+            app:civ_border_color="#795548"
+            app:civ_border_width="2dp" />
+
+        <RelativeLayout
+            android:id="@+id/wrapper_chatRoomItem_textWrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/img_chatRoomItem_roomImg"
+
+            >
+
+            <TextView
+                android:id="@+id/tv_chatRoomItem_roomName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textColor="#333333"
+                android:textStyle="bold"
+                tools:text="인간 행동과 심리" />
+
+            <TextView
+                android:id="@+id/tv_chatRoomItem_currentChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_chatRoomItem_roomName"
+                tools:text="ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" />
+
+            <TextView
+                android:id="@+id/tv_chatRoomItem_Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/tv_chatRoomItem_roomName"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="16dp"
+                tools:text="오후 4:28" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/wrapper_chatRoomItem_textWrapper"
+            android:background="#30000000"></View>
+
+    </RelativeLayout>
+
+</FrameLayout>

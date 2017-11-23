@@ -4,19 +4,23 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +38,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -63,7 +68,7 @@ import kr.co.hoonki.lecturechat.ChatBoardActivity;
 import kr.co.hoonki.lecturechat.LoginActivity;
 import kr.co.hoonki.lecturechat.R;
 
-public class ChatListActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class ChatListActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, ChatRoomRecyclerTouchHelper.RecyclerItemTouchHelperListener {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -72,6 +77,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
     private RecyclerView recyclerView;
     private ChatRoomAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private RelativeLayout coordinatorLayout;
 
     private FloatingActionMenu materialDesignFAM;
     private FloatingActionButton btnChatRoomAdd;
@@ -93,6 +99,8 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
         if (!checkLogin()) return;
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        coordinatorLayout = findViewById(R.id.view_chatList_coordinator);
 
         recyclerView = findViewById(R.id.rv_chatList_chatList);
 
@@ -198,6 +206,9 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
 
         txtTitle = (TextView) findViewById(R.id.tv_chatList_title);
         txtTitle.setText("채팅방 목록");
+
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ChatRoomRecyclerTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
     }
 
     private boolean checkLogin() {
@@ -223,27 +234,55 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
 
         mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot chatroomlistSnapshot : dataSnapshot.getChildren()) {
+            public void onDataChange(DataSnapshot ds) {
+
+                for (DataSnapshot chatroomlistSnapshot : ds.getChildren()) {
                     final String roomKey = chatroomlistSnapshot.getKey();
 
-                    DatabaseReference ref = mFirebaseDatabase.getReference("Room").child(roomKey);
+                    DatabaseReference ref = mFirebaseDatabase.getReference("Room").child(roomKey).getRef();
 
                     ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                        public void onDataChange(DataSnapshot ds2) {
                             String roomTitle, roomImageUrl;
 
-                            roomTitle = (String) dataSnapshot.child("roomName").getValue();
-                            roomImageUrl = (String) dataSnapshot.child("roomImage").getValue();
+                            roomTitle = (String) ds2.child("roomName").getValue();
+                            roomImageUrl = (String) ds2.child("roomImage").getValue();
+
                             adapter.setRoomName(roomTitle);
 
                             if (roomTitle != null) {
-                                ChatRoomItem item = new ChatRoomItem(roomKey, "", "", "", "");
+                                final ChatRoomItem item = new ChatRoomItem(roomKey, "", "", "", "");
+                                final int lastIndex = adapter.getItemCount() - 1;
                                 item.setRoomTitle(roomTitle);
                                 item.setRoomImgUrl(roomImageUrl);
 
-                                Log.d(TAG, "AddItem");
+                                if (ds2.hasChild("chats")) {
+                                    DatabaseReference chats = ds2.child("chats").getRef();
+
+                                    chats.limitToLast(1).addValueEventListener(new ValueEventListener() {
+
+                                        @Override
+                                        public void onDataChange(DataSnapshot ds3) {
+                                            // TODO : 최근 메시지 추가하기.
+                                            for (DataSnapshot chatSnapshot : ds3.getChildren()) {
+                                                String message = (String) chatSnapshot.child("message").getValue();
+                                                String sendTime = (String) chatSnapshot.child("sendTime").getValue();
+
+                                                item.setCurrentChat(message);
+                                                item.setCurrentChatDate(sendTime);
+
+                                                adapter.notifyDataSetChanged();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+                                }
+
                                 adapter.addItem(item);
                                 adapter.notifyDataSetChanged();
                             }
@@ -251,16 +290,15 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-                            Log.d(TAG, "OnCancelled!");
+
                         }
                     });
                 }
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "onCancelled");
+
             }
         });
     }
@@ -272,8 +310,7 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CREATE_REQUEST) {
                 getChatRoomData();
-            }
-            else if (requestCode == SEARCH_REQUEST) {
+            } else if (requestCode == SEARCH_REQUEST) {
                 getChatRoomData();
             }
         }
@@ -282,5 +319,38 @@ public class ChatListActivity extends AppCompatActivity implements GoogleApiClie
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        if (viewHolder instanceof ChatRoomAdapter.ViewHolder) {
+            // get the removed item name to display it in snack bar
+            final ChatRoomItem item = adapter.getItem(viewHolder.getAdapterPosition());
+
+            // backup of removed item for undo purpose
+            final ChatRoomItem deletedItem = adapter.getItem(viewHolder.getAdapterPosition());
+            final int deletedIndex = viewHolder.getAdapterPosition();
+
+            // remove the item from recycler view
+            adapter.removeItem(viewHolder.getAdapterPosition());
+            mRef = mFirebaseDatabase.getReference("User").child(mFirebaseUser.getUid() + "/chatRoomList/" + item.getChatUid());
+            mRef.removeValue();
+
+            // showing snack bar with Undo option
+            Snackbar snackbar = Snackbar
+                    .make(coordinatorLayout, item.getRoomTitle() + " 채팅방이 삭제되었습니다!", Snackbar.LENGTH_LONG);
+            snackbar.setAction("되돌리기", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // undo is selected, restore the deleted item
+                    adapter.restoreItem(deletedItem, deletedIndex);
+                    mRef = mFirebaseDatabase.getReference("User").child(mFirebaseUser.getUid() + "/chatRoomList/" + item.getChatUid());
+                    mRef.setValue(true);
+                }
+            });
+            snackbar.setActionTextColor(Color.YELLOW);
+            snackbar.show();
+        }
     }
 }

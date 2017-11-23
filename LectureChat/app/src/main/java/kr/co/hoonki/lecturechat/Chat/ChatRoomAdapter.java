@@ -51,25 +51,40 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
         ViewHolder itemHolder = (ViewHolder) holder;
 
         itemHolder.roomTitle.setText(chatRoomItems.get(position).getRoomTitle());
-        if (!itemHolder.currentChat.getText().equals("")) {
-            itemHolder.currentChat.setText(chatRoomItems.get(position).getCurrentChat());
+        String currentChat = chatRoomItems.get(position).getCurrentChat();
+        if (currentChat != null) {
+            if (!currentChat.equals("")) {
+                itemHolder.currentChat.setText(chatRoomItems.get(position).getCurrentChat());
+            } else {
+                itemHolder.currentChat.setText("최근 대화가 없습니다.");
+            }
         }
         else {
             itemHolder.currentChat.setText("최근 대화가 없습니다.");
         }
-        // TODO : 최근 메시지 날짜 가져와서 날짜 텍스트뷰 수정
-        itemHolder.chatTime.setText("날짜");
+
+        String currentChatDate = chatRoomItems.get(position).getCurrentChatDate();
+        if (currentChatDate != null) {
+            if (!currentChatDate.equals("")) {
+                itemHolder.chatTime.setText(currentChatDate);
+            } else {
+                itemHolder.chatTime.setText("");
+            }
+        }
+        else {
+            itemHolder.chatTime.setText("");
+        }
 
         String roomImgUrl = chatRoomItems.get(position).getRoomImgUrl();
         if (!roomImgUrl.equals("")) {
             Picasso.with(context).load(chatRoomItems.get(position).getRoomImgUrl()).into(itemHolder.roomImg);
         }
-        itemHolder.wrapper_total.setOnClickListener(new View.OnClickListener() {
+        itemHolder.foreground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ChatBoardActivity.class);
-                intent.putExtra("roomUid",chatRoomItems.get(position).getChatUid());
-                intent.putExtra("roomName",roomName);
+                intent.putExtra("roomUid", chatRoomItems.get(position).getChatUid());
+                intent.putExtra("roomName", chatRoomItems.get(position).getRoomTitle());
                 context.startActivity(intent);
             }
         });
@@ -80,13 +95,17 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
         return chatRoomItems.size();
     }
 
-    private class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView roomImg;
-        private TextView roomTitle,currentChat,chatTime;
-        private RelativeLayout wrapper_total;
-        private ViewHolder(View view) {
+    public ChatRoomItem getItem(int position) { return chatRoomItems.get(position); }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public ImageView roomImg;
+        public TextView roomTitle,currentChat,chatTime;
+        public RelativeLayout foreground;
+        public RelativeLayout background;
+        public ViewHolder(View view) {
             super(view);
-            wrapper_total = view.findViewById(R.id.wrapper_chatRoomItem_totalWrapper);
+            foreground = view.findViewById(R.id.wrapper_chatRoomItem_totalWrapper);
+            background = view.findViewById(R.id.view_chatRoomItem_background);
             roomImg = view.findViewById(R.id.img_chatRoomItem_roomImg);
             roomTitle = view.findViewById(R.id.tv_chatRoomItem_roomName);
             currentChat = view.findViewById(R.id.tv_chatRoomItem_currentChat);
@@ -101,6 +120,16 @@ public class ChatRoomAdapter extends RecyclerView.Adapter {
     }
     public void setRoomName(String roomName){
         this.roomName = roomName;
+    }
+
+    public void removeItem(int position) {
+        chatRoomItems.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void restoreItem(ChatRoomItem item, int position) {
+        chatRoomItems.add(position, item);
+        notifyItemInserted(position);
     }
 
 }
